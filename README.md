@@ -1,2 +1,2 @@
-# RAG_with_LM-studio
-RAG with LM studio, local LLMs
+# RAG_with_LM Studio
+RAG with LM Studio, local LLMs
