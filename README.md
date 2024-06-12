@@ -8,7 +8,8 @@ RAG with LM Studio, local LLMs
 - Recursive chunks
 - Embedding
 - Vectorization
-- Retrieval and OpenAI-based chat using LM studio
-- Display in new Browser TAB
+- Retrieval: 1. standard, 2. LangChain: MultiQueryRetriever
+- OpenAI-based chat using LM studio
+- Display Query, Prompt Info, Answer: dashboard Browser TAB
 - Retrieval and QA chain -based chat using LM studio
 - Display in new Browser TAB
