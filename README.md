@@ -34,4 +34,4 @@ This notebook performs the following operations:
 ### Running the Notebook
 1. Clone the repository.
 2. Install the required dependencies.
-3. Run the `Loop_PDFs_text_LM.ipynb` notebook to begin processing your PDFs.
+3. Run the `PDFs_RAG_with_LMstudio.ipynb` notebook to begin processing your PDFs.
