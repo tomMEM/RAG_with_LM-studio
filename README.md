@@ -1,6 +1,6 @@
 # RAG with LM Studio
 RAG with LM Studio, local LLMs
-## Main Notebook for RAG based on a set of PDFs: `Loop_PDFs_text_LM.ipynb`
+## Main Notebook for RAG based on a set of PDFs: `PDF_RAG_with_LMstudio.ipynb`
 This notebook performs the following operations:
 - **Reads all PDFs** in a given folder
 - **Extracts text** using GROBID
