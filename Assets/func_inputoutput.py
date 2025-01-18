@@ -133,10 +133,11 @@ def manage_conversation_history(history, max_tokens=1500):
         total_tokens += message_tokens
     
     return trimmed_history
-from collections import deque
-import tiktoken # need to install tiktoken if this is your preferred choice.
 
- def manage_conversation_history(history, max_tokens=1500):
+#from collections import deque
+#import tiktoken # need to install tiktoken if this is your preferred choice.
+
+ def manage_conversation_history_not_tested(history, max_tokens=1500):
      """
      Manage conversation history by truncating or summarizing
      Args:
