@@ -2,10 +2,12 @@ import json
 import os
 import nltk
 from collections import deque
+from typing import List, Dict, Tuple, Union, Optional
 
-def save_settings(settings, filename='settings.json'):
+def save_settings(settings: dict, filename: str = 'settings.json') -> None:
     """
     Save the settings dictionary to a JSON file.
+
     Args:
     - settings (dict): A dictionary containing the settings to be saved.
     - filename (str): The name of the JSON file where settings will be saved.
@@ -17,13 +19,15 @@ def save_settings(settings, filename='settings.json'):
     except (IOError, json.JSONEncodeError) as e:  # more specific exception
         print(f"Error saving settings: {e}")
 
-def load_settings(filename='settings.json'):
+def load_settings(filename: str = 'settings.json') -> Tuple[Optional[str], Optional[str], Optional[str], Optional[str], Optional[str], dict]:
     """
     Load the settings from a JSON file and return them as unpacked values.
+
     Args:
     - filename (str): The name of the JSON file from which settings will be loaded.
+
     Returns:
-    - tuple: The values of pdf_collection_path, database_directory, database_name, and remaining settings.
+    - tuple: The values of working_directory, pdf_collection_path, pdf_path, base_name, database_name, and remaining settings.
     """
     if os.path.exists(filename):
         try:
@@ -36,35 +40,35 @@ def load_settings(filename='settings.json'):
             pdf_path = settings.get('pdf_path')
             base_name = settings.get('base_name')
             database_name = settings.get('database_name')
-            value1 = settings.get('additional')
                         
             # Identify additional settings
-            remaining_settings = {key: value for key, value in settings.items() if key not in ['working_directory', 'pdf_collection_path', 'pdf_path', 'base_name', 'database_name']}
+            remaining_settings = {key: value for key, value in settings.items() if key not in [
+                'working_directory', 'pdf_collection_path', 'pdf_path', 'base_name', 'database_name']}
             print("\npath and name settings from above were loaded")  # Check for any additional settings and warn the user
             if remaining_settings:
                 print("\n  There are additional settings that could be added:")
                 for key, value in remaining_settings.items():
                     print(f"  {key}: {value}")
             return working_directory, pdf_collection_path, pdf_path, base_name, database_name, remaining_settings
-        except Exception as e:
+        except (IOError, json.JSONDecodeError) as e:
             print(f"Error loading settings: {e}")
             return None, None, None, None, None, {}
     else:
         print(f"Settings file {filename} does not exist.")
         return None, None, None, None, None, {}
 
-def manage_conversation_history(history, max_tokens=1500):
+def manage_conversation_history(history: List[Dict[str, str]], max_tokens: int = 1500) -> List[Dict[str, str]]:
     """
     Manage conversation history by truncating or summarizing
-    
+
     Args:
         history (list): Conversation history
         max_tokens (int): Maximum token limit for history
-    
+
     Returns:
         list: Managed conversation history
     """
-    def count_tokens(text):
+    def count_tokens(text: str) -> int:
         """Simple token estimation"""
         return len(text.split())  # Basic token counting
     
@@ -81,16 +85,18 @@ def manage_conversation_history(history, max_tokens=1500):
     
     return trimmed_history
 
-def manage_conversation_history_not_tested(history, max_tokens=1500):
+def manage_conversation_history_not_tested(history: List[Dict[str, str]], max_tokens: int = 1500) -> List[Dict[str, str]]:
     """
     Manage conversation history by truncating or summarizing
+
     Args:
         history (list): Conversation history
         max_tokens (int): Maximum token limit for history
+
     Returns:
         list: Managed conversation history
     """
-    def count_tokens(text):
+    def count_tokens(text: str) -> int:
         """Use tiktoken for more accurate token estimation"""
         try:
             encoding = tiktoken.encoding_for_model("gpt-4")  # Assuming you are working with gpt-4
@@ -113,7 +119,7 @@ def manage_conversation_history_not_tested(history, max_tokens=1500):
     
     return list(trimmed_history)  # return list 
 
-def summarize_history(history):
+def summarize_history(history: List[Dict[str, str]]) -> Union[str, List[Dict[str, str]]]:
     """
     Optionally summarize conversation history if it becomes too long
     
@@ -164,7 +170,7 @@ def decorator(fn):
         return debounced
     return decorator
 
-def check_and_download_punkt():
+def check_and_download_punkt() -> None:
     """Checks if Punkt Sentence Tokenizer is downloaded; downloads if not."""
     try:
         nltk.data.find('tokenizers/punkt')
@@ -174,12 +180,12 @@ def check_and_download_punkt():
     except Exception as e:
         print(f"An error occurred while checking or downloading Punkt: {e}")
 
-def word_count(messages):
+def word_count(messages: Union[str, List[Dict[str, str]]]) -> int:
     """Counts words in a string or a list of dictionaries (messages)."""
+    check_and_download_punkt()
     total_tokens = 0  # To keep track of the total token count
+    
     # Handle single long text input or list of messages
-    if not messages:
-        return 0
     if isinstance(messages, str):
         # If the input is a single string, tokenize directly
         try:
