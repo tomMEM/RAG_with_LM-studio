@@ -1,0 +1,264 @@
+/* outer_style */
+.outer-style {
+    color: #333433;
+    background-color: #ffffff;
+    text-align: center;
+    border: 2px solid #ced4da; /* Subtle border */
+}
+
+/* Target the slider handle */
+.noUi-handle {
+    background: #007bff !important; /* Blue color for the handle */
+    border: none !important; /* Remove default border */
+    border-radius: 50% !important; /* Make it a circle */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important; /* Add a subtle shadow */
+    cursor: pointer !important; /* Change cursor to pointer */
+}
+
+/* Optional: Add hover effect for the handle */
+.noUi-handle:hover {
+    background: #0056b3 !important; /* Darker blue on hover */
+}
+
+/* Optional: Add active effect for the handle (when dragging) */
+.noUi-handle:active {
+    background: #004080 !important; /* Even darker blue when active */
+}
+
+/* Target the slider track */
+.noUi-target {
+    background: #e0e0e0 !important; /* Light gray track */
+    border-radius: 10px !important; /* Slightly rounded edges for the track */
+    border: none !important; /* Remove default border */
+    box-shadow: none !important; /* Remove default shadow */
+}
+
+/* Target the filled part of the slider (progress bar) */
+.noUi-connect {
+    background: #007bff !important; /* Blue color for the filled part */
+    border-radius: 10px !important; /* Slightly rounded edges for the filled part */
+}
+
+/* input_box */
+.input-box {
+    visibility: visible !important;
+    color: #333333;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5; /* Consistent line height */
+    overflow-y: auto;
+    margin-top: 0; /* Remove top margin to align with output box */
+    text-align: left;
+    box-sizing: border-box; /* Include padding in width calculation */
+    width: 100%; /* Ensure the box stretches to the full width of its container */
+    resize: none; /* Prevent manual resizing */
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
+/* loading_indicator */
+.loading-indicator {
+    margin-left: 10px;
+    color: #007bff; /* Bootstrap primary color */
+}
+
+/* output_box */
+.output-box {
+    visibility: visible !important;
+    width: 100%;
+    color: #212529;
+    background-color: #f8f2f4;
+    border: 5px solid #dee2e6;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    padding: 10px;
+    box-sizing: border-box; /* Include padding in width calculation */
+    margin-top: 0;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    text-align: left;
+    hyphens: auto;
+    overflow-y: auto;
+    display: block;
+    max-width: 100%;
+}
+
+/* output_box3 */
+.output-box3 {
+    visibility: visible !important;
+    color: #212529;
+    background-color: #f0f2f4;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 400;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    max-width: 100%;
+}
+
+/* output_box2 */
+.output-box2 {
+    visibility: visible !important;
+    width: 100%;
+    color: #212529;
+    background-color: #f8f2f5;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    padding: 10px;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    text-align: left;
+    hyphens: auto;
+    overflow-y: auto;
+    display: block;
+    max-width: 100%;
+}
+
+/* output_box_retrievalTime */
+.output-box-retrieval-time {
+    visibility: visible !important;
+    color: #666666;
+    background-color: #f0f8ff;
+    padding: 4px 8px; /* Slightly more padding */
+    border-radius: 4px;
+    font-size: 12px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: 1px solid #ced4da; /* Subtle border */
+    font-family: Arial, sans-serif;
+}
+
+/* output_box_responseTime */
+.output-box-response-time {
+    visibility: visible !important;
+    color: #666666;
+    background-color: #f0f8ff;
+    padding: 4px 8px; /* Slightly more padding */
+    border-radius: 4px;
+    font-size: 12px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: 1px solid #ced4da; /* Subtle border */
+    font-family: Arial, sans-serif;
+}
+
+/* dashboard_layout */
+.dashboard-layout {
+    visibility: visible !important;
+    background-color: #f1f3f5;
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+    gap: 10px; /* Add vertical gap between rows */
+}
+
+/* markdown-header */
+.markdown-header {
+    visibility: visible !important;
+    text-align: center;
+    background-color: #ecf0f1;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    line-height: 1.2;
+}
+
+/* Target the button */
+.bk-btn {
+    background-color: #007bff !important; /* Blue background */
+    border: none !important; /* Remove border */
+    border-radius: 6px !important; /* Rounded corners */
+    padding: 8px 16px !important; /* Padding */
+    font-family: Arial, sans-serif !important; /* Custom font */
+    font-size: 14px !important; /* Font size */
+    color: white !important; /* Text color */
+    cursor: pointer !important; /* Pointer cursor */
+}
+
+/* Hover effect for the button */
+.bk-btn:hover {
+    background-color: #0056b3 !important; /* Darker blue on hover */
+}
+
+/* Active effect for the button */
+.bk-btn:active {
+    background-color: #004080 !important; /* Even darker blue on active */
+}
+
+
+
+/* Target the dropdown box */
+.bk-input {
+    background-color: #f8f9fa !important; /* Light gray background */
+    border: 1px solid #ced4da !important; /* Subtle border */
+    border-radius: 6px !important; /* Rounded corners */
+    padding: 8px 12px !important; /* Padding for better spacing */
+    font-family: Arial, sans-serif !important; /* Custom font */
+    font-size: 14px !important; /* Font size */
+    color: #333333 !important; /* Text color */
+}
+
+/* Target the dropdown arrow */
+.bk-input select {
+    appearance: none !important; /* Remove default arrow */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23007bff"><path d="M7 10l5 5 5-5z"/></svg>') !important; /* Custom blue arrow */
+    background-repeat: no-repeat !important;
+    background-position: right 8px center !important;
+    background-size: 12px !important;
+}
+
+/* Hover effect for the dropdown box */
+.bk-input:hover {
+    border-color: #007bff !important; /* Blue border on hover */
+}
+
+/* Focus effect for the dropdown box */
+.bk-input:focus {
+    border-color: #0056b3 !important; /* Darker blue border on focus */
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25) !important; /* Subtle glow */
+}
+
+/* Center the dropdown title/label */
+.bk-input-group label {
+  text-align: center !important;
+  width: 100% !important;
+  margin-bottom: 8px !important;
+  font-weight: bold !important;
+  font-family: Arial, sans-serif !important;
+  color: #333 !important; /* Optional: Custom text color */
+  background-color: #e3f2fd !important; /* Light blue background */  
+}
+
+
+/* Optional: Style the dropdown box itself */
+.bk-input-group .bk-input {
+  border-radius: 6px !important;
+  padding: 8px !important;
+  border: 1px solid #ced4da !important;
+  text-align: center !important;
+}
