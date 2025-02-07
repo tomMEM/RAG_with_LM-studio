@@ -37,7 +37,7 @@ def database_inspector(database_name, table_name):
         print("\n4. METADATA SUMMARY:")
         summary_queries = {
             "Unique Authors": f"SELECT COUNT(DISTINCT Authors) FROM {table_name}",
-            "Publication Years": f"SELECT DISTINCT Year FROM {table_name} ORDER BY Year",
+            "Publication Date": f"SELECT DISTINCT Date FROM {table_name} ORDER BY Date",
             "Journals": f"SELECT DISTINCT Journal FROM {table_name}"
         }
         
@@ -49,7 +49,7 @@ def database_inspector(database_name, table_name):
         # 5. Advanced Filtering Options
         print("\n5. FILTERING OPTIONS:")
         filter_options = [
-            ("Recent Publications", f"SELECT Title, Year FROM {table_name} ORDER BY Year DESC LIMIT 5"),
+            ("Recent Publications", f"SELECT Title, Date FROM {table_name} ORDER BY Date DESC LIMIT 5"),
             ("Longest Abstracts", f"SELECT Title, LENGTH(Abstract) as AbsLength FROM {table_name} ORDER BY AbsLength DESC LIMIT 5")
         ]
         
@@ -81,9 +81,9 @@ def database_inspector(database_name, table_name):
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
 
-# In your main script or as a separate function call
+
 def database_structure(database_name):
-    # Existing code...
+    
     
     # Option to inspect database
     inspect_db = input("Would you like to inspect the database? (y/n): ").lower()
@@ -99,5 +99,3 @@ def database_structure(database_name):
         table_name = result[0]
         database_inspector(database_name, table_name)
 
-# Alternatively, you can call directly
-# database_inspector('your_database.db', 'your_table_name')
