@@ -1,6 +1,7 @@
 # RAG with LM Studio
 RAG with LM Studio, local LLMs
-## Main Notebook for RAG based on a set of PDFs: `PDF_RAG_with_LMstudio_opti.ipynb`
+## StandAlone_Load_Vecdb_RAG_CHAT_v4.ipynb: Based on Gradio Dashboard, combining all the Steps in one Dashboard
+## Other Notebooks used cell by cell for RAG based on a set of PDFs: `PDF_RAG_with_LMstudio_opti.ipynb`
 
 ![Outline](outline.png)
 
