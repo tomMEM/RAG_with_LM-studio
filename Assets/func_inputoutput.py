@@ -1,6 +1,7 @@
 import json
 import os
-def save_settings(settings, filename='settings.json'):
+from pathlib import Path
+def save_settings_old(settings, filename='settings.json'):
     """
     Save the settings dictionary to a JSON file.
     Args:
@@ -14,19 +15,22 @@ def save_settings(settings, filename='settings.json'):
     except Exception as e:
         print(f"Error saving settings: {e}")
         
-def load_settings(filename='settings.json'):
+def load_settings_old(filename='settings.json', return_dict_directly=False):
     """
-    Load the settings from a JSON file and return them as unpacked values.
+    Load settings from a JSON file.
     Args:
-    - filename (str): The name of the JSON file from which settings will be loaded.
-    Returns:
-    - tuple: The values of pdf_collection_path, database_directory, database_name, and remaining settings.
+    - filename (str): The name of the JSON file.
+    - return_dict_directly (bool): If True, returns the raw settings dictionary.
+                                   If False (default), returns the specific unpacked tuple.
     """
     if os.path.exists(filename):
         try:
             with open(filename, 'r') as json_file:
                 settings = json.load(json_file)
             print(f"Settings loaded from {filename}.")
+
+            if return_dict_directly:
+                return settings # Gradio app would prefer this
             # Extract primary settings
             working_directory = settings.get('working_directory')
             pdf_collection_path = settings.get('pdf_collection_path')
@@ -45,13 +49,67 @@ def load_settings(filename='settings.json'):
             return working_directory, pdf_collection_path, pdf_path, base_name, database_name, remaining_settings
         except Exception as e:
             print(f"Error loading settings: {e}")
+            if return_dict_directly:
+                return {}
             return None, None, None, None, None, {}
     else:
         print(f"Settings file {filename} does not exist.")
+        if return_dict_directly:
+            return {}
         return None, None, None, None, None, {}
     
-    
 
+
+def load_settings(filename="settings.json") -> dict:
+    """
+    Loads settings from a JSON file and always returns a dictionary.
+    If the file doesn't exist, is empty, or contains invalid JSON,
+    an empty dictionary is returned.
+
+    Args:
+        filename (str): The name of the JSON file.
+
+    Returns:
+        dict: The loaded settings as a dictionary, or an empty dictionary on failure.
+    """
+    settings_path = Path(filename) # Using pathlib.Path for robustness
+    if settings_path.exists() and settings_path.is_file():
+        try:
+            with open(settings_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            if isinstance(data, dict):
+                print(f"Settings successfully loaded from {filename}.")
+                return data
+            else:
+                print(f"Warning: Content of '{filename}' is not a valid dictionary. Returning empty settings.")
+                return {}
+        except json.JSONDecodeError:
+            print(f"Warning: '{filename}' contains invalid JSON. Returning empty settings.")
+            return {}
+        except Exception as e:
+            print(f"Error loading settings from '{filename}': {e}. Returning empty settings.")
+            return {}
+    else:
+        print(f"Settings file '{filename}' not found or is not a file. Returning empty settings.")
+        return {}
+
+def save_settings(settings_data: dict, filename="settings.json") -> str:
+    """
+    Saves the given settings data (dictionary) to a JSON file.
+
+    Args:
+        settings_data (dict): The dictionary of settings to save.
+        filename (str): The name of the JSON file to save to.
+
+    Returns:
+        str: A status message.
+    """
+    try:
+        with open(filename, 'w', encoding='utf-8') as f:
+            json.dump(settings_data, f, indent=4)
+        return f"Settings successfully saved to {filename}"
+    except Exception as e:
+        return f"Error saving settings to {filename}: {e}"
 
     
     
