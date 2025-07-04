@@ -3,6 +3,8 @@ import os
 import nltk
 from collections import deque
 from typing import List, Dict, Tuple, Union, Optional
+import logging
+logging.basicConfig(level=logging.INFO)
 
 def save_settings(settings: dict, filename: str = 'settings.json') -> None:
     """
@@ -16,9 +18,10 @@ def save_settings(settings: dict, filename: str = 'settings.json') -> None:
         with open(filename, 'w') as json_file:
             json.dump(settings, json_file, indent=4)
         print(f"Settings saved to {filename}.")
-    except (IOError, json.JSONEncodeError) as e:  # more specific exception
+    except (IOError, json.TypeError) as e:  # more specific exception
         print(f"Error saving settings: {e}")
 
+import logging
 def load_settings(filename: str = 'settings.json') -> Tuple[Optional[str], Optional[str], Optional[str], Optional[str], Optional[str], dict]:
     """
     Load the settings from a JSON file and return them as unpacked values.
@@ -54,35 +57,45 @@ def load_settings(filename: str = 'settings.json') -> Tuple[Optional[str], Optio
             print(f"Error loading settings: {e}")
             return None, None, None, None, None, {}
     else:
-        print(f"Settings file {filename} does not exist.")
+        # At the top of your file, configure logging if not already done
+        logging.basicConfig(level=logging.INFO)
+        logging.warning(f"Settings file {filename} does not exist.")
         return None, None, None, None, None, {}
 
-def manage_conversation_history(history: List[Dict[str, str]], max_tokens: int = 1500) -> List[Dict[str, str]]:
-    """
-    Manage conversation history by truncating or summarizing
+try:
+    import tiktoken
+except ImportError:
+    tiktoken = None
 
-    Args:
-        history (list): Conversation history
-        max_tokens (int): Maximum token limit for history
-
-    Returns:
-        list: Managed conversation history
+def manage_conversation_history(
+    history: List[Dict[str, str]], 
+    max_tokens: int = 1500, 
+    tokenizer: Optional[callable] = None
+) -> List[Dict[str, str]]:
     """
+    Manage conversation history by truncating to max_tokens.
+    Optionally accepts a tokenizer callable.
+    """
+
     def count_tokens(text: str) -> int:
-        """Simple token estimation"""
-        return len(text.split())  # Basic token counting
-    
+        if tokenizer:
+            return len(tokenizer(text))
+        elif tiktoken:
+            try:
+                encoding = tiktoken.encoding_for_model("gpt-4")
+                return len(encoding.encode(text))
+            except Exception:
+                print("Warning: tiktoken model not found. Using basic tokenizer.")
+        return len(text.split())
+
     total_tokens = 0
     trimmed_history = []
-    
-    # Iterate backwards to keep most recent interactions
     for message in reversed(history):
         message_tokens = count_tokens(message['content'])
         if total_tokens + message_tokens > max_tokens:
             break
         trimmed_history.insert(0, message)
         total_tokens += message_tokens
-    
     return trimmed_history
 
 def manage_conversation_history_not_tested(history: List[Dict[str, str]], max_tokens: int = 1500) -> List[Dict[str, str]]:
@@ -119,33 +132,31 @@ def manage_conversation_history_not_tested(history: List[Dict[str, str]], max_to
     
     return list(trimmed_history)  # return list 
 
-def summarize_history(history: List[Dict[str, str]]) -> Union[str, List[Dict[str, str]]]:
+def summarize_history(history: List[Dict[str, str]], openai_client=None, model_name=None) -> Union[str, List[Dict[str, str]]]:
     """
     Optionally summarize conversation history if it becomes too long
-    
     Args:
         history (list): Conversation history
-    
+        openai_client: An instance of the OpenAI API client
+        model_name: Name of the model to use for summarization
     Returns:
         str: Summarized context or original history
     """
     if not history:
         return ""
     
-    if len(history) > 10:  # Example threshold for summarization
+    if len(history) > 10 and openai_client and model_name:
         try:
             summary_prompt = """
             Summarize the key points and context from the following conversation history,
             focusing on the most relevant information for future context:
-            
+
             {history}
-            
+
             Provide a concise summary that captures the essential context.
             """
-            
-            # Use LLM to generate summary
-            summary_response = client.chat.completions.create(
-                model=model_name,  # Use a more capable model for summarization
+            summary_response = openai_client.chat.completions.create(
+                model=model_name,
                 messages=[
                     {"role": "system", "content": "You are a context summarization assistant."},
                     {"role": "user", "content": summary_prompt.format(
@@ -153,21 +164,28 @@ def summarize_history(history: List[Dict[str, str]]) -> Union[str, List[Dict[str
                     )}
                 ]
             )
-            
             return summary_response.choices[0].message.content
-        except openai.APIError as e:
+        except Exception as e:
             print(f"Summarization error: {e}")
-    
-    return history  # Return original history if summarization fails
+    return history # Return original history if summarization fails
 
-def decorator(fn):
-    last_call = [0]
-    def debounced(*args, **kwargs):
-        current_time = time.time()
-        if current_time - last_call[0] > wait:
-            last_call[0] = current_time
-            return fn(*args, **kwargs)
-        return debounced
+import time
+
+import time
+
+def debounce(wait):
+    """
+    Decorator that postpones a function's execution until after wait seconds
+    have elapsed since the last invocation.
+    """
+    def decorator(fn):
+        last_call = [0]
+        def wrapped(*args, **kwargs):
+            current_time = time.time()
+            if current_time - last_call[0] > wait:
+                last_call[0] = current_time
+                return fn(*args, **kwargs)
+        return wrapped
     return decorator
 
 def check_and_download_punkt() -> None:
@@ -181,9 +199,11 @@ def check_and_download_punkt() -> None:
         print(f"An error occurred while checking or downloading Punkt: {e}")
 
 def word_count(messages: Union[str, List[Dict[str, str]]]) -> int:
-    """Counts words in a string or a list of dictionaries (messages)."""
+    """
+    Counts tokens (words) in a string or a list of dictionaries (messages).
+    """
     check_and_download_punkt()
-    total_tokens = 0  # To keep track of the total token count
+    total_tokens = 0 # To keep track of the total token count
     
     # Handle single long text input or list of messages
     if isinstance(messages, str):
