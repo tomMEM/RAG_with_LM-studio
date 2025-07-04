@@ -4,7 +4,32 @@ import nltk
 from collections import deque
 from typing import List, Dict, Tuple, Union, Optional
 import logging
-logging.basicConfig(level=logging.INFO)
+from logging.handlers import RotatingFileHandler
+
+# Create a custom logger
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)  # Set the lowest level you want to capture
+
+# Create handlers
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.INFO)  # Console shows INFO and above
+
+file_handler = logging.FileHandler('logs/app.log', maxBytes=2*1024*1024, backupCount=5)
+file_handler.setLevel(logging.DEBUG)    # File logs everything DEBUG and above
+
+# Create formatters and add to handlers
+formatter = logging.Formatter('%(asctime)s [%(levelname)s] %(message)s')
+console_handler.setFormatter(formatter)
+file_handler.setFormatter(formatter)
+
+# Add handlers to the logger
+logger.addHandler(console_handler)
+logger.addHandler(file_handler)
+
+# Example usage
+#logger.debug("This is a DEBUG message (file only)")
+#logger.info("This is an INFO message (file + console)")
+#logger.error("This is an ERROR message (file + console)")
 
 def save_settings(settings: dict, filename: str = 'settings.json') -> None:
     """
