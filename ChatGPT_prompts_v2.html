@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT Agent Mode Cheat-Sheet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#8B5CF6',
+                        dark: '#1E293B',
+                        light: '#F8FAFC',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Georgia', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-light text-dark font-sans">
+
+<!-- ====== Navigation ====== -->
+<header class="bg-white/90 backdrop-blur-sm shadow-sm sticky top-0 z-50">
+  <nav class="container mx-auto flex justify-between items-center p-4">
+    <div class="flex items-center">
+        <i class="fa fa-terminal text-primary text-2xl mr-3"></i>
+        <h1 class="text-xl font-bold text-primary">ChatGPT Project & Agent Mode Cheat-Sheet</h1>
+    </div>
+
+    <ul class="flex space-x-6 text-sm">
+      <li><a href="#top" class="font-medium text-primary hover:underline">Home</a></li>
+      <li><a href="#commands" class="font-medium text-primary hover:underline">Commands</a></li>
+      <li><a href="#capabilities" class="font-medium text-primary hover:underline">Capabilities</a></li>
+	  <li><a href="#sync" class="font-medium text-primary hover:underline">Sync</a></li>
+	  <li><a href="#memory" class="font-medium text-primary hover:underline">Memory</a></li>
+	  <li><a href="#memory-setup" class="font-medium text-primary hover:underline">Memory-setup</a></li>
+	  
+    </ul>
+  </nav>
+</header>
+
+<!-- ====== Hero Section ====== -->
+<section id="top" class="bg-gradient-to-r from-primary/90 to-secondary/90 text-white py-16 text-center">
+    <h2 class="text-4xl font-bold mb-3">Project & Agent Mode Commands</h2>
+    <h3 class="text-xl opacity-90">A Practical Cheat-Sheet for Coding, File Management & Automation</h3>
+    <p class="max-w-2xl mx-auto text-lg mt-4 opacity-90">
+        Use this guide to operate ChatGPT Projects efficiently — including opening files, editing, comparing, running code, debugging, and exporting.
+    </p>
+</section>
+
+<!-- ====== Main Content ====== -->
+<main class="container mx-auto px-4 py-12">
+
+    <!-- Notice -->
+    <div class="mb-8 text-center text-sm text-gray-600">
+        <span class="inline-block px-3 py-1 rounded-full bg-gray-200">
+            All commands below can be typed directly inside a Project.
+        </span>
+    </div>
+
+    <!-- ====== Commands Section ====== -->
+    <section id="commands" class="mb-20">
+        <h2 class="text-3xl font-bold text-dark mb-6 text-center">Core Commands</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <!-- OPEN FILES -->
+            <div class="bg-white rounded-xl shadow-md p-6 leading-relaxed">
+                <h3 class="text-2xl font-bold text-primary mb-4">Open / View Files</h3>
+                <ul class="list-disc ml-6 space-y-2">
+                    <li><strong>"Open core.py."</strong> — Displays the entire file.</li>
+                    <li><strong>"Show me all project files."</strong> — Lists every file.</li>
+                    <li><strong>"Search for the function login_user across all files."</strong></li>
+                </ul>
+            </div>
+
+            <!-- EDIT FILES -->
+            <div class="bg-white rounded-xl shadow-md p-6 leading-relaxed">
+                <h3 class="text-2xl font-bold text-primary mb-4">Edit Files</h3>
+                <ul class="list-disc ml-6 space-y-2">
+                    <li><strong>"Modify core.py: update the login logic."</strong></li>
+                    <li><strong>"Add a new function validate_config() in utils.py."</strong></li>
+                    <li><strong>"Fix the bug in line 45 of ui.py."</strong></li>
+                    <li><strong>"Refactor database.py to use async."</strong></li>
+                </ul>
+            </div>
+
+            <!-- COMPARE -->
+            <div class="bg-white rounded-xl shadow-md p-6 leading-relaxed">
+                <h3 class="text-2xl font-bold text-primary mb-4">Code Review / Comparison</h3>
+                <ul class="list-disc ml-6 space-y-2">
+                    <li><strong>"Show a diff between old and new core.py."</strong></li>
+                    <li><strong>"Explain what changed in ui.py and why."</strong></li>
+                    <li><strong>"Compare version1.py and version2.py."</strong></li>
+                </ul>
+            </div>
+
+            <!-- RUN CODE -->
+            <div class="bg-white rounded-xl shadow-md p-6 leading-relaxed">
+                <h3 class="text-2xl font-bold text-primary mb-4">Run Code</h3>
+                <ul class="list-disc ml-6 space-y-2">
+                    <li><strong>"Run the project."</strong></li>
+                    <li><strong>"Run core.py with sample input."</strong></li>
+                    <li><strong>"Call calculate(10, 5) and show output."</strong></li>
+                </ul>
+            </div>
+
+            <!-- DEBUGGING -->
+            <div class="bg-white rounded-xl shadow-md p-6 leading-relaxed">
+                <h3 class="text-2xl font-bold text-primary mb-4">Debugging</h3>
+                <ul class="list-disc ml-6 space-y-2">
+                    <li><strong>"Run tests and show errors."</strong></li>
+                    <li><strong>"Debug the error in data_loader.py."</strong></li>
+                    <li><strong>"Trace where this variable becomes None."</strong></li>
+                </ul>
+            </div>
+
+            <!-- FILE MGMT -->
+            <div class="bg-white rounded-xl shadow-md p-6 leading-relaxed">
+                <h3 class="text-2xl font-bold text-primary mb-4">File Creation & Management</h3>
+                <ul class="list-disc ml-6 space-y-2">
+                    <li><strong>"Create config.json with default settings."</strong></li>
+                    <li><strong>"Create README.md describing the project."</strong></li>
+                    <li><strong>"Rename old.py to legacy.py."</strong></li>
+                    <li><strong>"Delete temp.txt."</strong></li>
+                    <li><strong>"Duplicate core.py as core_backup.py."</strong></li>
+                </ul>
+            </div>
+
+            <!-- IMPORT/EXPORT -->
+            <div class="bg-white rounded-xl shadow-md p-6 leading-relaxed">
+                <h3 class="text-2xl font-bold text-primary mb-4">Import / Export</h3>
+                <ul class="list-disc ml-6 space-y-2">
+                    <li><strong>"Export the entire project as a ZIP."</strong></li>
+                    <li><strong>"Download core.py."</strong></li>
+                    <li><strong>"Upload this file and replace utils.py."</strong></li>
+                </ul>
+            </div>
+
+            <!-- PROJECT CONTROL -->
+            <div class="bg-white rounded-xl shadow-md p-6 leading-relaxed">
+                <h3 class="text-2xl font-bold text-primary mb-4">Project Control</h3>
+                <ul class="list-disc ml-6 space-y-2">
+                    <li><strong>"Describe the current project structure."</strong></li>
+                    <li><strong>"Summarize progress so far and next steps."</strong></li>
+                    <li><strong>"Switch to teaching mode: explain changes before saving."</strong></li>
+                    <li><strong>"Use fast mode: make changes without long explanations."</strong></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<!-- ===================================================================== -->
+<!-- ========== NEW SECTION: What Code ChatGPT Can Run ==================== -->
+<!-- ===================================================================== -->
+
+<section id="capabilities" class="mb-20">
+    <h2 class="text-3xl font-bold text-dark mb-6 text-center">What Code Can ChatGPT Run?</h2>
+
+    <p class="text-center max-w-2xl mx-auto text-gray-700 mb-10">
+        ChatGPT Projects execute Python code inside a secure sandbox.  
+        Here is a clear overview of what’s supported, partially supported, or not supported.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- SUPPORTED -->
+        <div class="bg-white rounded-xl shadow-md p-6 leading-relaxed border-l-4 border-secondary">
+            <h3 class="text-2xl font-bold text-secondary mb-4">✔️ Fully Supported Code</h3>
+            <ul class="list-disc ml-6 space-y-2">
+                <li>Pure Python scripts</li>
+                <li>NumPy, Pandas, Matplotlib</li>
+                <li>SciPy + scikit-learn (common parts)</li>
+                <li>Statistical tests (ANOVA, t-tests, regression, etc.)</li>
+                <li>Data cleaning & transformation</li>
+                <li>File I/O (CSV, JSON, XLSX, images)</li>
+                <li>Pytest test suites</li>
+                <li>Machine learning models (CPU-only)</li>
+            </ul>
+        </div>
+
+        <!-- PARTIALLY SUPPORTED -->
+        <div class="bg-white rounded-xl shadow-md p-6 leading-relaxed border-l-4 border-accent">
+            <h3 class="text-2xl font-bold text-accent mb-4">⚠️ Partially Supported</h3>
+            <ul class="list-disc ml-6 space-y-2">
+                <li>Plotly (static only — no interactive UI)</li>
+                <li>Scripts requiring small datasets</li>
+                <li>Long-running tasks (may time out)</li>
+                <li>Code that depends on missing optional packages</li>
+            </ul>
+        </div>
+
+        <!-- NOT SUPPORTED -->
+        <div class="bg-white rounded-xl shadow-md p-6 leading-relaxed border-l-4 border-primary">
+            <h3 class="text-2xl font-bold text-primary mb-4">❌ Not Supported</h3>
+            <ul class="list-disc ml-6 space-y-2">
+                <li>Web servers (Flask, FastAPI, Django)</li>
+                <li>Dashboards (Dash, Streamlit, Gradio)</li>
+                <li>Browser automation (Selenium)</li>
+                <li>Network access / calling external URLs</li>
+                <li>GPU / CUDA code</li>
+                <li>Installing system packages (apt-get)</li>
+                <li>pip install external libraries</li>
+            </ul>
+        </div>
+
+        <!-- PYTHON VERSION -->
+        <div class="bg-white rounded-xl shadow-md p-6 leading-relaxed border-l-4 border-dark">
+            <h3 class="text-2xl font-bold text-dark mb-4">🐍 Python Version</h3>
+            <p>
+                Projects use a modern Python interpreter (typically 3.9–3.11).  
+                You can verify inside a Project by running:
+            </p>
+            <div class="bg-gray-100 border border-gray-300 rounded-lg p-4 mt-3 font-mono text-sm">
+                import sys<br>
+                print(sys.version)
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Summary Box -->
+    <div class="mt-12 bg-blue-50 border-l-4 border-primary p-6 rounded-r-xl shadow">
+        <h3 class="text-xl font-bold text-primary mb-3">Summary</h3>
+        <p class="text-gray-800">
+            ChatGPT excels at running analytical Python code, handling files, performing statistics, debugging, and running automated tests.  
+            Web servers, dashboards, GPU code, or external connections must run on your local machine — but you can still develop and edit them inside a Project.
+        </p>
+    </div>
+
+</section>
+
+<!-- ====================== NEW SYNC SECTION ======================= -->
+<section id="sync" class="mb-20">
+    <h2 class="text-3xl font-bold text-dark mb-6 text-center">Syncing Local Code with Uploaded Project Files</h2>
+
+    <div class="bg-white rounded-xl shadow-md p-6 space-y-6 leading-relaxed">
+        <p class="text-gray-700 text-center max-w-3xl mx-auto">
+            ChatGPT Projects keep uploaded files indexed and persistent. If you paste newer code in chat,
+            the model may still rely on older uploaded files unless you synchronize them manually.
+            Use the commands below to ensure your project stays up to date.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- OPTION 1 -->
+            <div class="border-l-4 border-primary bg-gray-50 p-6 rounded-r-xl shadow">
+                <h3 class="text-xl font-bold text-primary mb-3">✔️ Option 1 — Replace Uploaded File with New Code</h3>
+                <p>Paste your updated script and say:</p>
+                <div class="bg-white border p-3 rounded mt-2 font-mono text-sm">
+                    "Replace filename.py with this code:"
+                </div>
+                <p class="mt-3 text-gray-700">This ensures the uploaded version always stays current.</p>
+            </div>
+
+            <!-- OPTION 2 -->
+            <div class="border-l-4 border-secondary bg-gray-50 p-6 rounded-r-xl shadow">
+                <h3 class="text-xl font-bold text-secondary mb-3">✔️ Option 2 — Delete Old Uploaded Files</h3>
+                <p>If you want to work only from chat and avoid file interference:</p>
+                <div class="bg-white border p-3 rounded mt-2 font-mono text-sm">
+                    "Delete file /mnt/data/extendedstat_func_v2.py"
+                </div>
+                <p class="mt-3 text-gray-700">Repeat for any other files you want removed.</p>
+            </div>
+
+            <!-- OPTION 3 -->
+            <div class="border-l-4 border-accent bg-gray-50 p-6 rounded-r-xl shadow">
+                <h3 class="text-xl font-bold text-accent mb-3">✔️ Option 3 — Use Uploaded Files as Source of Truth</h3>
+                <p>Keep your authoritative code in the project files and update them incrementally:</p>
+                <div class="bg-white border p-3 rounded mt-2 font-mono text-sm">
+                    "Apply this diff to filename.py"
+                </div>
+                <p class="mt-3 text-gray-700">ChatGPT will update only the changed parts.</p>
+            </div>
+
+            <!-- OPTION 4 -->
+            <div class="border-l-4 border-dark bg-gray-50 p-6 rounded-r-xl shadow">
+                <h3 class="text-xl font-bold text-dark mb-3">✔️ Option 4 — Git-Based Workflow</h3>
+                <p>You can ask ChatGPT to maintain Git-style versioning:</p>
+                <div class="bg-white border p-3 rounded mt-2 font-mono text-sm">
+                    "Create a commit message for these changes."
+                </div>
+                <p class="mt-3 text-gray-700">Useful for long-term collaborative projects.</p>
+            </div>
+        </div>
+
+        <div class="mt-10 bg-blue-50 border-l-4 border-primary p-6 rounded-r-xl shadow">
+            <h3 class="text-xl font-bold text-primary mb-3">Recommended Workflow</h3>
+            <ul class="list-disc ml-6 space-y-2">
+                <li>Keep master code inside uploaded project files.</li>
+                <li>Always update those files when pasting new code.</li>
+                <li>Avoid mixing outdated uploaded files with new chat code.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ====================== NEW MEMORY SECTION ======================= -->
+<section id="memory" class="mb-20">
+    <h2 class="text-3xl font-bold text-dark mb-6 text-center">Using ChatGPT Memory for Better Coding Sessions</h2>
+
+    <div class="bg-white rounded-xl shadow-md p-6 space-y-6 leading-relaxed">
+
+        <p class="text-gray-700 text-center max-w-3xl mx-auto">
+            ChatGPT Memory helps the assistant remember your long-term preferences across sessions.
+            While it cannot store code or project files, it can greatly improve how ChatGPT assists you
+            in analysis, code development, and HTML generation.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <!-- MEMORY ITEM 1 -->
+            <div class="border-l-4 border-primary bg-gray-50 p-6 rounded-r-xl shadow">
+                <h3 class="text-xl font-bold text-primary mb-3">✔️ Versioned Output Files</h3>
+                <p>Tell ChatGPT to always assume you prefer versioned outputs (e.g. *_v1, *_v2).</p>
+                <div class="bg-white border p-3 rounded font-mono text-sm mt-2">
+                    "Remember that I always use versioned output files."
+                </div>
+                <p class="mt-3 text-gray-700">
+                    This ensures the assistant automatically proposes versioned filenames when generating results.
+                </p>
+            </div>
+
+            <!-- MEMORY ITEM 2 -->
+            <div class="border-l-4 border-secondary bg-gray-50 p-6 rounded-r-xl shadow">
+                <h3 class="text-xl font-bold text-secondary mb-3">✔️ Dataset Context</h3>
+                <p>Store the fact that you work with data.</p>
+                <div class="bg-white border p-3 rounded font-mono text-sm mt-2">
+                    "Remember that I use datasets."
+                </div>
+                <p class="mt-3 text-gray-700">
+                    This helps ChatGPT understand your analysis patterns, columns, metrics, and workflows.
+                </p>
+            </div>
+
+            <!-- MEMORY ITEM 3 -->
+            <div class="border-l-4 border-accent bg-gray-50 p-6 rounded-r-xl shadow">
+                <h3 class="text-xl font-bold text-accent mb-3">✔️ Full Script Generation</h3>
+                <p>Tell ChatGPT to always produce full code scripts rather than partial snippets.</p>
+                <div class="bg-white border p-3 rounded font-mono text-sm mt-2">
+                    "Remember that I want full code scripts, not partial snippets."
+                </div>
+                <p class="mt-3 text-gray-700">
+                    This avoids missing imports, undefined variables, and incomplete refactors.
+                </p>
+            </div>
+
+            <!-- MEMORY ITEM 4 -->
+            <div class="border-l-4 border-dark bg-gray-50 p-6 rounded-r-xl shadow">
+                <h3 class="text-xl font-bold text-dark mb-3">✔️ High-Quality HTML Formatting</h3>
+                <p>Tell ChatGPT to always maintain clean semantic HTML structure.</p>
+                <div class="bg-white border p-3 rounded font-mono text-sm mt-2">
+                    "Remember that I want HTML sections well formatted."
+                </div>
+                <p class="mt-3 text-gray-700">
+                    Perfect for building cheat sheets, documentation, dashboards, or UI mockups.
+                </p>
+            </div>
+			<!-- MEMORY ITEM 5 -->
+			<div class="border-l-4 border-dark bg-gray-50 p-6 rounded-r-xl shadow">
+				<h3 class="text-xl font-bold text-dark mb-3">✔️ Stored Info</h3>
+				<p>Ask ChatGPT what personal information it currently remembers about you.</p>
+				<div class="bg-white border p-3 rounded font-mono text-sm mt-2">
+					"What do you remember about me?"
+				</div>
+				<p class="mt-3 text-gray-700">
+					You can edit or delete stored memory anytime in Settings → Personalization → Memory.
+				</p>
+			</div>
+
+
+        </div>
+
+        <div class="mt-10 bg-blue-50 border-l-4 border-primary p-6 rounded-r-xl shadow">
+            <h3 class="text-xl font-bold text-primary mb-3">Recommended Memory Setup</h3>
+            <ul class="list-disc ml-6 space-y-2">
+                <li>Store preferences that affect *how* ChatGPT works, not your code content.</li>
+                <li>Use Memory for workflow and formatting conventions.</li>
+                <li>Do NOT store large code or files in Memory — use Project storage.</li>
+                <li>Memory improves consistency across sessions.</li>
+            </ul>
+        </div>
+    </div>
+</section
+
+<!-- ====================== MEMORY SETUP GUIDE ======================= -->
+<section id="memory-setup" class="mb-20">
+    <h2 class="text-3xl font-bold text-dark mb-6 text-center">Memory Setup Guide</h2>
+
+    <div class="bg-white rounded-xl shadow-md p-6 space-y-6 leading-relaxed">
+        <p class="text-gray-700 text-center max-w-3xl mx-auto">
+            ChatGPT offers two types of memory: Global Memory and Project Context Memory.
+            Understanding their differences helps you create more powerful workflows
+            for coding, documentation, and long-term work inside ChatGPT Projects.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <!-- Global Memory -->
+            <div class="border-l-4 border-primary bg-gray-50 p-6 rounded-r-xl shadow">
+                <h3 class="text-xl font-bold text-primary mb-3">✔️ Global Memory</h3>
+                <p>Controlled by the toggle <strong>“Reference saved memories”</strong> in Settings.</p>
+                <p>Use this to store general long-term preferences such as:</p>
+                <ul class="list-disc ml-6 space-y-1 mt-3 text-gray-700">
+                    <li>“Remember that I always use versioned output files.”</li>
+                    <li>“Remember that I want full code scripts, not partial snippets.”</li>
+                    <li>“Remember that I want HTML sections well formatted.”</li>
+                </ul>
+                <p class="mt-3 text-gray-700">
+                    These preferences apply across all projects and all future conversations.
+                </p>
+            </div>
+
+            <!-- Project Context Memory -->
+            <div class="border-l-4 border-secondary bg-gray-50 p-6 rounded-r-xl shadow">
+                <h3 class="text-xl font-bold text-secondary mb-3">✔️ Project Context Memory</h3>
+                <p>Automatically enabled and <strong>separate</strong> from Global Memory.</p>
+                <p>ChatGPT remembers everything inside each project:</p>
+                <ul class="list-disc ml-6 space-y-1 mt-3 text-gray-700">
+                    <li>Your uploaded files</li>
+                    <li>Your Python modules and scripts</li>
+                    <li>Your analysis workflow</li>
+                    <li>Your error patterns and code structure</li>
+                    <li>Your HTML cheat sheet file</li>
+                </ul>
+                <p class="mt-3 text-gray-700">
+                    This memory is <strong>isolated per project</strong> — your project
+                    context will never interfere with your writing or other domain-specific projects.
+                </p>
+            </div>
+
+            <!-- What Memory Cannot Do -->
+            <div class="border-l-4 border-accent bg-gray-50 p-6 rounded-r-xl shadow">
+                <h3 class="text-xl font-bold text-accent mb-3">✔️ What Memory Cannot Store</h3>
+                <p>For safety, ChatGPT does <strong>not</strong> store:</p>
+                <ul class="list-disc ml-6 space-y-1 mt-3 text-gray-700">
+                    <li>Your Python source code</li>
+                    <li>Your HTML source code</li>
+                    <li>Your datasets</li>
+                    <li>Your uploaded files</li>
+                </ul>
+                <p class="mt-3 text-gray-700">
+                    These belong to the Project Storage only. ChatGPT may remember your preferences
+                    about how to work with them, but not the files themselves.
+                </p>
+            </div>
+
+            <!-- Suggested Commands -->
+            <div class="border-l-4 border-dark bg-gray-50 p-6 rounded-r-xl shadow">
+                <h3 class="text-xl font-bold text-dark mb-3">✔️ Suggested Memory Commands</h3>
+                <p>These commands help ChatGPT personalize your coding environment:</p>
+                <div class="bg-white border p-3 rounded font-mono text-sm mt-2">
+                    "Remember that I use datasets."
+                </div>
+                <div class="bg-white border p-3 rounded font-mono text-sm mt-2">
+                    "Remember that I always want complete code scripts."
+                </div>
+                <div class="bg-white border p-3 rounded font-mono text-sm mt-2">
+                    "Remember that I prefer versioned output filenames."
+                </div>
+                <div class="bg-white border p-3 rounded font-mono text-sm mt-2">
+                    "What do you remember about me?"
+                </div>
+                <p class="mt-3 text-gray-700">
+                    You can manage or delete saved Memory anytime in Settings → Personalization → Memory.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="mt-10 bg-blue-50 border-l-4 border-primary p-6 rounded-r-xl shadow">
+            <h3 class="text-xl font-bold text-primary mb-3">Best Practices</h3>
+            <ul class="list-disc ml-6 space-y-2 text-gray-700">
+                <li>Use <strong>Global Memory</strong> for workflow preferences.</li>
+                <li>Rely on <strong>Project Context</strong> to isolate domains and codebases.</li>
+                <li>Keep your files in the Project folder for persistent access.</li>
+                <li>Use manual upload/replace for files until project editing capabilities improve.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+
+</main>
+
+<!-- ====== Footer ====== -->
+<footer class="bg-dark text-white py-8">
+    <div class="container mx-auto px-4 text-center">
+        <p>&copy; 2025 ChatGPT Project Cheat-Sheet</p>
+        <p class="mt-2 text-sm text-gray-400">Designed for developers using Agent Mode & Projects.</p>
+    </div>
+</footer>
+
+</body>
+</html>
